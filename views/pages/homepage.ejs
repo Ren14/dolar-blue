@@ -1,0 +1,135 @@
+<div id="homepage" :class="[heroHeightSet ? '' : 'uninitialized']" v-cloak >
+  <div class="container" style="overflow-x: auto;">
+    <h2>Cotizador rulo buenbit</h2>
+    <table class="table table-bordered mt-4" >
+      <tbody>
+        <tr>
+          <th>Importe a comprar en dolares</th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">U$S</span>
+              </div>
+              <input type="number" name="dolar" v-model="dolarCompra" class="form-control" @change="calcularValores" autofocus="" onclick="$(this).select();">
+            </div>              
+          </th>
+        </tr>
+        <tr class="d-auto d-md-none">
+          <th>GANANCIA</th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">$</span>
+              </div>
+              <input style="background-color: #9fe2ae99"  type="text" name="ganancia" v-model="ganancia" class="form-control" readonly="readonly">
+            </div> 
+          </th>
+        </tr>
+        <tr>
+          <th><i class="fa fa-cloud"></i> Cotización dolar<br><small class="d-none d-md-block">Cotización obtenida de <a href="http://www.brubank.com" target="_blank"> Brubank</a> mediante <a href="https://criptoya.com/api/" target="_blank"> Criptoya API</a></small></th>
+          <th style="min-width: 250px">
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">U$S / ARS</span>
+              </div>
+              <input style="background-color: white" type="number" name="cotizacion" v-model="cotizacion" class="form-control" readonly="readonly">
+            </div> 
+          </th>
+        </tr>
+        <tr>
+          <th>Impuesto país</th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">30 %</span>
+              </div>
+              <input style="background-color: white" type="number" name="impuestoPais" v-model="impuestoPais" class="form-control" readonly="readonly">
+            </div>               
+          </th>
+        </tr>
+        <tr>
+          <th>Dolar solidario<br><small class="d-none d-md-block">Suma de Cotización del dólar más el impuesto país</small></th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">$</span>
+              </div>
+              <input style="background-color: white" type="number" name="dolarSolidario" v-model="dolarSolidario" class="form-control" readonly="readonly">
+            </div>               
+          </th>
+        </tr>
+        <tr>
+          <th>Inversión en pesos<br><small class="d-none d-md-block">Cantidad de pesos ARS que se necesitan invertir para adquirir {{dolarCompra}} dólares</small></th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">$</span>
+              </div>
+              <input style="background-color: #ffc10745" type="text" name="cantidadPesos" v-model="cantidadPesos" class="form-control" readonly="readonly">
+            </div> 
+          </th>
+        </tr>
+        <tr>
+          <th><i class="fa fa-cloud"></i> Cotización DAI/USD<br><small class="d-none d-md-block">Cotización obtenida de <a href="http://www.buenbit.com" target="_blank">Buenbit</a> mediante <a href="https://criptoya.com/api/" target="_blank"> Criptoya API</a></small></th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">DAI / U$S</span>
+              </div>
+              <input style="background-color: white" type="number" name="cotizacionDAI" v-model="cotizacionDAI" class="form-control" readonly="readonly">
+            </div> 
+
+          </th>
+        </tr>
+        <tr>
+          <th>DAIS a comprar<br><small class="d-none d-md-block">Cantidad de dólares a comprar divididos por la cotización de DAI/USD Compra</small></th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">DAI</span>
+              </div>
+              <input style="background-color: white" type="number" name="cantidadDAI" v-model="cantidadDAI" class="form-control" readonly="readonly">
+            </div> 
+          </th>
+        </tr>
+        
+        <tr>
+          <th><i class="fa fa-cloud"></i> Cotización DAI/ARS<br><small class="d-none d-md-block">Cotización obtenida de <a href="http://www.buenbit.com" target="_blank">Buenbit</a> mediante <a href="https://criptoya.com/api/" target="_blank"> Criptoya API</a></small></th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">DAI / U$S</span>
+              </div>
+              <input style="background-color: white" type="number" name="cotizacionDAIVenta" v-model="cotizacionDAIVenta" class="form-control" readonly="readonly">
+            </div> 
+          </th>
+        </tr>
+        <tr>
+          <th>Pesos que obtengo<br><small class="d-none d-md-block">Cantidad de DAIS compradas multiplicado por la cotizacion DAI/ARS</small></th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">$</span>
+              </div>
+              <input style="background-color: white"  type="text" name="diferencia" v-model="diferencia" class="form-control" readonly="readonly">
+            </div> 
+          </th>
+
+        </tr>
+        <tr>
+          <th>GANANCIA</th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">$</span>
+              </div>
+              <input style="background-color: #9fe2ae99"  type="text" name="ganancia" v-model="ganancia" class="form-control" readonly="readonly">
+            </div> 
+          </th>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>  
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
