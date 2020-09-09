@@ -2,6 +2,10 @@
 
 a [Sails v1](https://sailsjs.com) application
 
+# Instalacion
+Clonar el repo -> git clone https://github.com/Ren14/dolar-blue.git
+Instalar dependencias -> npm install
+Ejecutar -> node app.js
 
 ### Links
 
