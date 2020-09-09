@@ -251,8 +251,8 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
      onlyAllowOrigins: [
-       'https://dolar-blue.herokuapp.com/',
-       'http://dolar-blue.herokuapp.com/',
+       'https://dolar-blue.herokuapp.com',
+       'http://dolar-blue.herokuapp.com',
      ],
 
 
@@ -371,7 +371,7 @@ module.exports = {
   *                                                                         *
   ***************************************************************************/
   custom: {
-    baseUrl: 'https://dolar-blue.herokuapp.com/',
+    baseUrl: 'https://dolar-blue.herokuapp.com',
     internalEmailAddress: 'support@example.com',
 
     // mailgunDomain: 'mg.example.com',
