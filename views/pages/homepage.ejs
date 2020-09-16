@@ -37,7 +37,7 @@
           </th>
         </tr>
         <tr>
-          <th>Impuesto país</th>
+          <th>Impuesto país 30 %</th>
           <th>
             <div class="input-group ">
               <div class="input-group-prepend">
@@ -48,7 +48,18 @@
           </th>
         </tr>
         <tr>
-          <th>Dolar solidario<br><small class="d-none d-md-block">Suma de Cotización del dólar más el impuesto país</small></th>
+          <th>Impuesto ganancia 35 %</th>
+          <th>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">35 %</span>
+              </div>
+              <input style="background-color: white" type="number" name="impuestoGanancia" v-model="impuestoGanancia" class="form-control" readonly="readonly">
+            </div>               
+          </th>
+        </tr>
+        <tr>
+          <th>Dolar SUPER MEGA Cepo<br><small class="d-none d-md-block">Suma de Cotización del dólar más el impuesto país</small></th>
           <th>
             <div class="input-group ">
               <div class="input-group-prepend">
@@ -123,7 +134,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">$</span>
               </div>
-              <input style="background-color: #9fe2ae99"  type="text" name="ganancia" v-model="ganancia" class="form-control" readonly="readonly">
+              <input v-if="ganancia > 0" style="background-color: #9fe2ae99"  type="text" name="ganancia" v-model="ganancia" class="form-control" readonly="readonly">
+              <input v-if="gananciaNumero <= 0" style="background-color: #ff000054"  type="text" name="ganancia" v-model="ganancia" class="form-control" readonly="readonly">
             </div> 
           </th>
 

@@ -14,6 +14,8 @@ parasails.registerPage('homepage', {
     cotizacionDAIVenta: 0, // Obtener desde API
     diferencia: 0,
     ganancia: 0,
+    impuestoGanancia: 0,
+    gananciaNumero: 0,
 
   },
 
@@ -55,12 +57,13 @@ parasails.registerPage('homepage', {
     },
 
     getCotizacionDolar: async function(){
-      await axios.get(`https://criptoya.com/api/brubank`)
+      await axios.get(`https://criptoya.com/api/dolar`)
       .then((result) => {           
         console.log(result)  ;
-        this.cotizacion = result.data.ask;  
+        this.cotizacion = result.data.oficial;  
         this.impuestoPais = this.cotizacion * 0.3; 
-        this.dolarSolidario = this.cotizacion + this.impuestoPais;
+        this.impuestoGanancia = this.cotizacion * 0.35;
+        this.dolarSolidario = this.cotizacion + this.impuestoPais + this.impuestoGanancia;
         this.calcularValores();
       })
       .catch(err => {
@@ -110,10 +113,12 @@ parasails.registerPage('homepage', {
       this.cantidadDAI = this.dolarCompra / this.cotizacionDAI;
       this.diferencia = this.cantidadDAI * this.cotizacionDAIVenta;
       this.ganancia = this.diferencia - this.cantidadPesos ;
+      this.gananciaNumero = this.diferencia - this.cantidadPesos ;
 
       // Modifico el tamño de los decimales
       this.cantidadPesos = new Intl.NumberFormat("ar-AR").format(this.cantidadPesos);
       this.cantidadDAI = this.cantidadDAI.toFixed(3);
+      this.impuestoGanancia = new Intl.NumberFormat("ar-AR").format(this.impuestoGanancia);
       this.diferencia = new Intl.NumberFormat("ar-AR").format(this.diferencia);
       this.ganancia = new Intl.NumberFormat("ar-AR").format(this.ganancia);
 
